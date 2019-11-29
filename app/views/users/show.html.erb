@@ -1,1 +1,9 @@
+<h1>User Page</h1>
+<h3><%= @user.username %></h3>
 
+List of posts with comments:
+
+<ul>
+    <% @user.comments.each do |comment| %>
+        <li><%= link_to comment.post.title, post_path(comment.post) %></li>
+    <% end %>

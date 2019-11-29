@@ -1,0 +1,17 @@
+<%= form_for @comment do |cf| %>
+    <%= cf.label "Select User or Create a New User" %><br />
+    <%= cf.collection_select :user_id, User.all, :id, :username, include_blank: true %><br/>
+    <%= cf.fields_for :user, @comment.build_user do |user_field| %>
+        <%= user_field.label :username %>
+        <%= user_field.text_field :username %><br/>
+        <%= user_field.label "e-mail" %>
+        <%= user_field.text_field :email %><br />
+    <% end %>
+
+    <%= cf.label :content %>
+    <%= cf.text_area :content %><br />
+
+    <%= cf.hidden_field :post_id, value: @post.id %>
+
+    <%= cf.submit "Create Comment" %>
+<% end %>
